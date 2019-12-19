@@ -6,17 +6,17 @@ import {Message} from 'semantic-ui-react'
 import {
   DateInput,
 } from 'semantic-ui-calendar-react';
-
 import 'semantic-ui-css/semantic.min.css';
-
 import './App.css';
-import _ from 'lodash'
 
 class App extends React.Component {
 
   handleChange = (event, {name, value}) => {
     if (this.state.hasOwnProperty(name)) {
-      this.setState({ [name]: value });
+      this.setState({ [name]: value,
+        error:false,
+        success:false 
+      });
     }
   }
 
@@ -24,7 +24,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      date: new Date(),
+      date: "10-10-2019",
       religion:'',
       country:'',
       documents:'',
@@ -116,32 +116,51 @@ class App extends React.Component {
   onSubmit = () => {
     // if (this.)
     this.checkCitizenship();
-    this.setState({
-      error:true,
-      success:true
-    });
   }
 
   checkCitizenship = () => {
 
       if(this.state.documents.endsWith("yes")){
         this.setState({
-          successMessage:"Congrats!! You are Indian",
+          successMessage:"Congrats!! You have Indian Citizenship" ,
           success:true
         });
       }
       else {
-        if(this.state.religion.endsWith("muslim")){
+        if(this.state.religion.endsWith("muslims")){
           this.setState({
-            errorMessage:"Oops!! You are an Illegal Immigrant",
+            errorMessage:"It's not clear about your fate. You may get the Citizenship from the other process",
             error:true
           });
         }
         else{
-          // if(this.state.date.)
+          if(this.getDate(this.state.date) < 2015){
+            if ( this.state.country === "pakistan" || this.state.country === "bangladesh" || this.state.country === "afghanistan"){
+              this.setState({
+                successMessage:"You will get Citizenship by 2021",
+                success:true
+              });
+            }
+            else {
+              this.setState({
+                successMessage:"You may get Citizenship but not through CAA",
+                success:true
+              });
+            }
+
+          } else {
+            this.setState({
+              successMessage:"You may get Citizenship but not through CAA.",
+              success:true
+            });
+          }
         }
       }
 
+  }
+
+  getDate(str){
+      return parseInt(str.substr(str.length-4,4))
   }
 
   render(){
@@ -205,7 +224,7 @@ class App extends React.Component {
           
           <Form.Field required>
             <label>
-              Do you have <a href="">Documents</a> to prove you Ancestor came to India before 1971?
+              Do you have <a href="https://www.google.com/search?q=documents+that+needs+to+be+shown+for+CAA&rlz=1C1CHBF_enIN793IN793&oq=docum&aqs=chrome.0.69i59j69i57j0l2j69i60l3j69i65.2143j0j4&sourceid=chrome&ie=UTF-8">Documents</a> to prove you Ancestor came to India before 1971?
             </label>
             <Dropdown
               placeholder='Documents'
@@ -219,15 +238,16 @@ class App extends React.Component {
           </Form.Field>
           <Message
             error
-            header='Could you check something!'
-            list={[
-              'That e-mail has been subscribed, but you have not yet clicked the verification link in your e-mail.',
-              ]}
+            header='You are an illegal migrant!!'
+            list={
+                [this.state.errorMessage]
+              }
           />
 
           <Message
             success
-            header={this.state.successMessage}
+            // header={this.state.successMessage}
+            header = "Congrats!!"
             list={
               [this.state.successMessage]
             }
@@ -235,8 +255,6 @@ class App extends React.Component {
           <Form.Button content='submit'/>
           {/* Submit</Form.Button> */}
       </Form>
-      <div>You will get Indian Citizenship</div>
-      <div></div>
       </main>
       <footer id="footer">Made with <span style={{color: "#e25555"}}>&#9829;</span> in India</footer>
     </div>
