@@ -256,7 +256,7 @@ class App extends React.Component {
           {/* Submit</Form.Button> */}
       </Form>
       </main>
-      <h4>Got some feedback or correction, Use <a href="https://forms.gle/5uMmggawLMiYgPbA7">this</a> link</h4>
+      <h4>Got some feedback or correction, Use <a href="https://forms.gle/1bL3NNkxRsgogDk79">this</a> link</h4>
 
       <footer id="footer">
         <div class = "footer-item">
