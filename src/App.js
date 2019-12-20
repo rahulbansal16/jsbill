@@ -263,7 +263,7 @@ class App extends React.Component {
           Made with <span style={{color: "#e25555"}}>&#9829;</span> in India
         </div>
         <div class = "footer-item" style={{color: "#e25555"}}>
-          Some info presented might be incomplete and wrong, Please consider a lawyer for more details.
+          Some info presented might be incomplete and wrong, Please consult a lawyer for more details.
         </div>
       </footer>
     </div>
