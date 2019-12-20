@@ -162,13 +162,13 @@ class App extends React.Component {
   getDate(str){
       return parseInt(str.substr(str.length-4,4))
   }
-
+  
   render(){
   return (
-    <div>
-      <header id="header">Impact of Cab and NRC </header>
+    <div id = "app">
+      <header id="header"><h1 id ="h1">CAA and NRC</h1></header>
       <main id = "main"> 
-      <h1>Are you an Indian Citizen?</h1>
+      <h3 id = "impact">How does CAA and NRC impact?</h3>
       <Form id = "form" error={this.state.error} success={this.state.success} onSubmit={this.onSubmit}>
           
           <Form.Field required>
@@ -256,7 +256,16 @@ class App extends React.Component {
           {/* Submit</Form.Button> */}
       </Form>
       </main>
-      <footer id="footer">Made with <span style={{color: "#e25555"}}>&#9829;</span> in India</footer>
+      <h4>Got some feedback or correction, Use this link</h4>
+
+      <footer id="footer">
+        <div class = "footer-item">
+          Made with <span style={{color: "#e25555"}}>&#9829;</span> in India
+        </div>
+        <div class = "footer-item" style={{color: "#e25555"}}>
+          Some info presented might be incomplete and wrong, Please consider a lawyer for more details.
+        </div>
+      </footer>
     </div>
   );
   }
